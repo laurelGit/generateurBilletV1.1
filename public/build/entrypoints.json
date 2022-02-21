@@ -1,0 +1,14 @@
+{
+  "entrypoints": {
+    "app": {
+      "js": [
+        "http://localhost:8080/build/runtime.js",
+        "http://localhost:8080/build/vendors-node_modules_date-io_date-fns_build_index_esm_js-node_modules_material-ui_core_esm_Cs-a3eb0e.js",
+        "http://localhost:8080/build/app.js"
+      ],
+      "css": [
+        "http://localhost:8080/build/app.css"
+      ]
+    }
+  }
+}

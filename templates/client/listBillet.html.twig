@@ -1,0 +1,10 @@
+{% extends('base.html.twig') %}
+
+{% block body %}
+    {% for image in images %}
+        <img width="350" height="500" src="{{asset('assets/img_billet/')}}{{ image }}" alt="download_image">
+        <a href="{{ path('client.download_img', {imgName: image}) }}">
+		    <button type="button" class="btn btn-outline-dark">Telecharger Billet</button>
+	    </a>
+    {% endfor %}
+{% endblock %}

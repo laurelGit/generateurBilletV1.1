@@ -1,0 +1,67 @@
+{% extends('base.html.twig') %}
+
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="{{ asset('assets/assets1/css/main.css') }}"/>
+{% endblock %}
+
+{% block body %}
+	<div id="wrapper">
+		<ul>
+			<li>
+				<a href="#" class="icon brands fa-twitter" style="width: 50px; height: 50px">
+					<span class="label">Twitter</span>
+				</a>
+			</li>
+		</ul>
+		<style>
+			#header h1 {
+    			font-size: 2.5em;
+    			font-weight: 900;
+    			letter-spacing: -0.035em;
+    			line-height: 1em;
+			}
+			#header h2 {
+    			font-size: 2em;
+    			font-weight: 900;
+    			letter-spacing: -0.035em;
+    			line-height: 1em;
+			}
+
+			@media screen and (max-width: 736px) {
+				#header h2 {
+        			font-size: 1em;
+    			}
+				#header h1 {
+        			font-size: 2.0em;
+    			}
+			}
+		</style>
+		<div id="bg"></div>
+		<div id="overlay"></div>
+		<div
+			id="main">
+
+			<!-- Header -->
+			<header id="header">
+				<img src="{{ asset('assets/logo/logo_ada2.png') }}" style="width: 200px; height: 200px;">
+				<h3>Bienvenu !</h3>
+				<h1>Générateur de Billet d'Acerfi Dance Academy</h1>
+				<p> </p>
+				<h2>Evènement en cours : <a href="https://dance.acerfi.net/ada-champions-kiz">ADA Champion's KIZ</a></h2>
+				<p>Grande compétition de danse organisée à l'occasion de l'anniversaire de la prestigieuse academie de danse d'ACERFI</p>
+				<nav>
+					
+					<div class="container-contact2-form-btn">
+						<div class="wrap-contact2-form-btn">
+							<div class="contact2-form-bgbtn"></div>
+							<a href="{{ path('app_login') }}">
+								<button class="contact2-form-btn">Connexion</button>
+							</a>
+						</div>
+					</div>
+				</nav>
+			</header>
+		</div>
+	</div>
+{% endblock %}

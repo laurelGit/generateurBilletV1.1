@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/assets1/css/main.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}">{% endblock %} {% block body %}
+
+<div class="bg-contact2">
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <div class="embed-responsive embed-responsive-16by9">
+                <video id="preview" class="embed-responsive-item"></video>
+
+                <script type="text/javascript">
+                    let scanner = new Instascan.Scanner({
+                        video: document.getElementById('preview')
+                    });
+                    scanner.addListener('scan', function(content) {
+                        console.log(content);
+                        var data = document.getElementById('contentData');
+                        var url = '{{ path("client.scan_decoder", {'contentData': 'content'}) }}'
+                        url = url.replace("content", content);
+                        //console.log(url);
+                        window.location.href = url;
+                        data.innerHTML = content;
+                    });
+                    Instascan.Camera.getCameras().then(function(cameras) {
+                        if (cameras.length > 0) {
+                            scanner.start(cameras[0]);
+                            $('[name="options"]').on('change', function() {
+                                if ($(this).val() == 1) {
+                                    if (cameras[0] != "") {
+                                        scanner.start(cameras[0]);
+                                    } else {
+                                        alert('No Front camera found!');
+                                    }
+                                } else if ($(this).val() == 2) {
+                                    if (cameras[1] != "") {
+                                        scanner.start(cameras[1]);
+                                    } else {
+                                        alert('No Back camera found!');
+                                    }
+                                }
+                            });
+                        } else {
+                            console.error('No cameras found.');
+                        }
+                    }).catch(function(e) {
+                        console.error(e);
+                    });
+                </script>
+            </div>
+            <center>
+                <div class="btn-group btn-group-toggle mb-5" data-toggle="buttons">
+                    <label class="btn btn-primary active">
+    		<input type="radio" name="options" value="1" autocomplete="off" checked> Front Camera
+ 		</label>
+                    <label class="btn btn-secondary">
+			<input type="radio" name="options" value="2" autocomplete="off"> Back Camera
+		</label>
+                </div>
+            </center>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

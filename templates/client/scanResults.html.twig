@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}">
+{% endblock %}
+
+{% block body %}
+	<div class="bg-contact2">
+		<div class="container-contact2">
+			<div
+				class="wrap-contact2">
+				{# <span class="contact2-form-title">
+																	Resultats du scan
+																</span> #}
+
+				<center>
+					<h1 style="font-weight: bold">Resultats du scan</h1>
+				</center><br>
+				<div class="wrap-input2 validate-input" data-validate="Name is required">
+					<div class="form-group row">
+						Nom:
+						<h4>{{ client.nom }}</h4>
+					</div>
+				</div>
+				<div class="wrap-input2 validate-input" data-validate="Name is required">
+					<div class="form-group row">
+						Prenom:
+						<h4>{{ client.prenom }}</h4>
+					</div>
+				</div>
+				<div class="wrap-input2 validate-input" data-validate="Name is required">
+					<div class="form-group row">
+						Adresse mail:
+						<h4>{{ client.email }}</h4>
+					</div>
+				</div>
+				<div class="wrap-input2 validate-input" data-validate="Name is required">
+					<div class="form-group row">
+						Numéro de téléphone:
+						<h4>{{ client.contact }}</h4>
+					</div>
+				</div>
+				<div class="wrap-input2 validate-input" data-validate="Name is required">
+					<div class="form-group row">
+						Numéro de table:
+						<h4>{{ client.numtable }}</h4>
+					</div>
+				</div>
+
+				{% if status == "Non Payer" %}
+					<div class="form-check form-switch">
+						{{ form(form) }}
+						</div>
+					{% else %}
+						<span class="contact2-form-title">
+							<h1>{{ status }}</h1>
+						</span>
+						{% if verifier == "Non Verifier" %}
+						<div class="form-check form-switch">
+							{{ form(formv) }}
+							</div>
+						{% else %}
+							<span class="contact2-form-title">
+								<h1>{{ verifier }}</h1>
+							</span>
+					{% endif %}
+					
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		{% endblock %}

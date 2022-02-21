@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %} {% block title %} Accès interdit {% endblock %}{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/assets1/css/main.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}">{% endblock %} {% block body %}
+<style>
+    .titreSecond {
+        font-size: 2em;
+        visibility: visible;
+        color: #333333;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<div class="bg-contact2">
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <span class="contact2-form-title">
+                Accès interdit
+            </span>
+            <h1 class="titreSecond">
+                Vous n'avez pas les droits d'accès à cette page. Veuillez contacter votre administrateur.
+            </h1>
+        </div>
+    </div>
+</div>
+{% endblock %}

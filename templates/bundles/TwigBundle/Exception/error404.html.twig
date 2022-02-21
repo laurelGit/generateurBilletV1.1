@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %} {% block title %} Erreur d'accès à la page {% endblock %}{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/assets1/css/main.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}">{% endblock %} {% block body %}
+<style>
+    .titreSecond {
+        font-size: 2em;
+        visibility: hidden;
+        color: #333333;
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<div class="bg-contact2">
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <span class="contact2-form-title">
+                Cette page n'a pas été trouvée.
+            </span>
+            <h1 class="titreSecond">
+                Veuillez contacter votre administrateur.
+            </h1>
+        </div>
+    </div>
+</div>
+{% endblock %}

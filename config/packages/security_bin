@@ -1,0 +1,74 @@
+security:
+  enable_authenticator_manager: true
+  # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: "auto"
+    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
+    App\Entity\User:
+      algorithm: auto
+    App\Entity\ClientUser:
+      algorithm: auto
+
+
+  providers:
+    app_clientuser_provider:
+      entity:
+        class: App\Entity\ClientUser
+        property: username
+    app_user_provider:
+      entity:
+        class: App\Entity\User
+        property: email
+    # used to reload user from session & other features (e.g. switch_user)
+    # used to reload user from session & other features (e.g. switch_user)
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    
+    clientuser_secured_area:
+      pattern: ^/clientuser
+      provider: app_clientuser_provider
+      form_login:
+        login_path: /clientuser/login
+        check_path: /clientuser/login_check
+        default_target_path: /clientuser/login
+        username_parameter: username
+        password_parameter: password
+      guard:
+        authenticators:
+          - App\Security\CustomClientAuthenticator
+      logout:
+        path: app_logout
+        target: /admin/login
+    
+    user_secured_area:
+      pattern: ^/client
+      provider: app_user_provider
+      form_login:
+        login_path: /login
+        check_path: /client/login_check
+        default_target_path: /login
+        username_parameter: email
+        password_parameter: password
+
+
+      # activate different ways to authenticate
+      # https://symfony.com/doc/current/security.html#the-firewall
+
+      # https://symfony.com/doc/current/security/impersonating_user.html
+      # switch_user: true
+
+  # Easy way to control access for large sections of your site
+  # Note: Only the *first* access control that matches will be used
+  access_control:
+    - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/inscription, roles: ROLE_ADMIN }
+    - { path: ^/client/dashboard, roles: ROLE_ADMIN }
+    - { path: ^/client/scan_decoder, roles: [ROLE_ADMIN, ROLE_CAISSIER] }
+    - {
+        path: ^/client/creerClient,
+        roles: [ROLE_USER, ROLE_ADMIN, ROLE_CAISSIER, ROLE_VENDEUR],
+      }
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }

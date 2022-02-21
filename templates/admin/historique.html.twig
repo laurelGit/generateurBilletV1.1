@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}"> {% endblock %} {% block body %}
+
+
+<div class="bg-contact2">
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <div class="table-responsive">
+                <table class="table">
+                    <caption>Liste des utilisateurs</caption>
+                    {{ render(controller(
+                        'App\\Controller\\SearchController::searchBar'
+                    )) }}
+                    <thead>
+                        <tr>
+                            <th scope="col">Nom(s)</th>
+                            <th scope="col">Prenom(s)</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Fonction</th>
+                            <th scope="col">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        
+                            <tr>
+                                <th scope="row">{{ user.nom }}</th>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{user.email}}</td>
+                                <td>{% for role in user.roles %}
+                                    {{ role }}
+                                {% endfor %}</td>
+                                <td>
+                        <a href="{{ path('client.details', {id: user.id, nom: user.nom}) }}"><button type="button" class="btn btn-outline-dark">Details</button></a>
+					            </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {# <div class="container-contact2-form-btn">
+                <div class="wrap-contact2-form-btn">
+                    <div class="contact2-form-bgbtn"></div>
+                    <a href="{{ path('client.historique') }}">
+                        <button class="contact2-form-btn">Historique</button>
+                    </a>
+                </div>
+            </div> #}
+        </div>
+    </div>
+</div>
+{% endblock %}

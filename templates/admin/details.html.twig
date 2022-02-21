@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %} {% block stylesheets %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/main.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/util.css') }}"> {% endblock %} {% block body %}
+
+
+<div class="bg-contact2">
+    <div class="container-contact2">
+        <div class="wrap-contact2">
+            <div class="table-responsive">
+                {% if detailsCaisse %}
+                    <table class="table">
+                    <caption>Liste des Ventes caisse</caption>
+                    {{ render(controller(
+                        'App\\Controller\\SearchController::searchBar'
+                    )) }}
+                    <thead>
+                        <h2>Details caisse pour Utilisateur : {{utilisateur}}</h2>
+                        <h3>Nombre de billet en caisse : {{lenCaisse}}</h3>
+                        <tr>
+                            <th scope="col">Nom(s)</th>
+                            <th scope="col">Prenom(s)</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Categorie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in detailsCaisse %}
+                        
+                            <tr>
+                                <th scope="row">{{ user.nom }}</th>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.contact}}</td>
+                                <td>{{user.categorie}}</td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h2>Aucune donnee caisse</h2>
+                {% endif %}
+                
+
+                {% if detailsVente %}
+                <table class="table">
+                    <caption>Liste des Ventes</caption>
+                    <thead>
+                        <h2>Details vente pour Utilisateur : {{utilisateur}}</h2>
+                        <h3>Nombre de billet en vendu : {{lenVente}}</h3>
+                        <tr>
+                            <th scope="col">Nom(s)</th>
+                            <th scope="col">Prenom(s)</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col">Categorie</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in detailsVente %}
+                        
+                            <tr>
+                                <th scope="row">{{ user.nom }}</th>
+                                <td>{{ user.prenom }}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.contact}}</td>
+                                <td>{{user.categorie}}</td>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                    <h2>Aucune donnee de vente</h2>
+                {% endif %}
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
